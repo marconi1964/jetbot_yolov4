@@ -56,7 +56,7 @@ sudo pip3 install gdown
 Clone the project of tensorrt_demos to your home directory, and then setup environment by following its instruction.
 
 ```
-git clone https://github.com/jkjung-avt/tensorrt_demos.git
+git clone https://github.com/marconi1964/jetbot_yolov4.git
 ```
 
 Download model and config from the google drive (For CUDA 10.0)
