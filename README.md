@@ -2,8 +2,6 @@
 
 ## Prepare image
 
-### Method 1
-
 Download the latest image from the link below according to your type of Jetson Nano and burn it into a SD card. 
 
 https://jetbot.org/master/software_setup/sd_card.html
@@ -38,9 +36,12 @@ Create swap, refer to the link below:
 
 https://chtseng.wordpress.com/2019/05/01/nvida-jetson-nano-%E5%88%9D%E9%AB%94%E9%A9%97%EF%BC%9A%E5%AE%89%E8%A3%9D%E8%88%87%E6%B8%AC%E8%A9%A6/
 
-### Method 2
-
 ## Model Training
+
+Use Google Colab to run 'visual_model.ipynb'
+- remember to change runtime type to 'GPU'
+
+
 
 ## Car Deploying
 
@@ -86,3 +87,11 @@ Finally, you can run main.py now.
 cd ~/tensorrt_demos
 python3 main.py
 ```
+
+
+------------------
+Reference
+- JK Jung / Inventec
+    - [PPT - Applications of Real-time Object Detection on NVIDIA Jetson TX2](https://on-demand.gputechconf.com/gtc-taiwan/2018/pdf/1-7_General%20Speaker_Inventec_PDF%20For%20Sharing.pdf)
+    - Blog : https://jkjung-avt.github.io/
+    - Github : https://github.com/jkjung-avt/
