@@ -90,7 +90,7 @@ python3 main.py
 
 
 ------------------
-Reference
+## Reference
 - JK Jung / Inventec
     - [PPT - Applications of Real-time Object Detection on NVIDIA Jetson TX2](https://on-demand.gputechconf.com/gtc-taiwan/2018/pdf/1-7_General%20Speaker_Inventec_PDF%20For%20Sharing.pdf)
     - Blog : https://jkjung-avt.github.io/
