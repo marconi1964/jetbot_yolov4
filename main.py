@@ -280,7 +280,7 @@ else:
 cap = VideoCapture(gst_str)
 
 print("Start to load YoloV4 model")
-trt_yolo = TrtYOLO('yolov4_my-416', (416, 416), 4)
+trt_yolo = TrtYOLO('yolov4-416', (416, 416), 4)
 
 print("YoloV4 model is loaded.")
 
