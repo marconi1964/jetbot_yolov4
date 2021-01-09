@@ -113,7 +113,7 @@ $
 > <span style="color:green">11. Create Linux OS disk SWAP, refer to [the link](https://chtseng.wordpress.com/2019/05/01/nvida-jetson-nano-%E5%88%9D%E9%AB%94%E9%A9%97%EF%BC%9A%E5%AE%89%E8%A3%9D%E8%88%87%E6%B8%AC%E8%A9%A6/) 執行以下指令  </span>
 
 ```
-# 理想的SWAP size應是RAM的二倍，但由於SD空間不是很充裕，先設定8G SWAP。
+# 理想的SWAP size應是RAM的二倍，但由於SD空間不是很充裕，先設定 4G 或 8G SWAP。
 $ sudo fallocate -l 8G /swapfile
 $ sudo chmod 600 /swapfile
 $ ls -lh /swapfile
@@ -123,7 +123,7 @@ $ sudo mkswap /swapfile
 $ sudo swapon /swapfile
 $ sudo swapon –show
 
-# 輸入free -h確認已經有 8G SWAP空間了
+# 輸入free -h確認已經有 4G 或 8G SWAP空間了
 free –h
 
 # 由於重開機後SWAP設定便會跑掉，因此，把SWAP加到fstab設定檔中。
@@ -133,9 +133,6 @@ $ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
 ## <span style="color:blue">專案啟動</span>
-
-<span style="color:red">參考 Derek 同學 fork 出來的 README
-[Jetbot_YoloV4 - README](https://github.com/marconi1964/jetbot_yolov4) </span> , 執行以下指令
 
 #### <span style="color:red">從 JetPack 4.4.1 （Jetbot 0.4.2) 得支援 2GB 版本, 因此 remove 不少套件, 而且從 command line 開機, 因此, 即使我們用的是 4GB 版本, 還是得安裝許多套件 </span>   
 
@@ -251,6 +248,7 @@ $ make
 > 1. 在 Google Colab 執行 'visual_model.ipynb' - github <span style="color:green">
 [Jetbot_YoloV4 - README](https://github.com/marconi1964/jetbot_yolov4) </span> )
 >    - remember to change runtime type to 'GPU'
+>    - 儲存模型 yolov4-416.weights 跟 yolov4-416.cfg 到 Jetson Nano
 
 > 2. <span style="color:green">Model translation from to onnx to tensorrt </span>
 
@@ -285,3 +283,4 @@ $ python3 main.py
     - Github : [Training a DarkNet YOLOv4 model for custimized dataset](https://github.com/jkjung-avt/yolov4_crowdhuman)
     - Blog : https://jkjung-avt.github.io/
     - Blog : [TensorRT YOLOv3 For Custom Trained Models](https://jkjung-avt.github.io/trt-yolov3-custom/)
+- 參考 [Derek 同學的 github](https://github.com/derekhsu/jetbot_yolov4)
