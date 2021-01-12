@@ -26,10 +26,11 @@ $
 Table 1. Native Linux Distribution Support in CUDA 11.2 
 
 |Distribution 	|Kernel1 	|Default GCC 	|GLIBC 	|GCC2,3 	|ICC3 	|PGI3 	|XLC3 	|CLANG 	|Arm C/C++|
-|x86_64|
 |:------------- |:-------------|:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|
 |RHEL 8.y (y <= 3) 	|4.18 	|8.3.1 	|2.28 	|9.x 	|19.1 	|19.x, 20.x 	|NO 	|9.0.0 	|NO|
 
+
+|x86_64|
 
 |CentOS 8.y (y <= 3) 	|4.18 	|8.3.1 	|2.28| ditto |
 RHEL 7.y (y <= 9) 	3.10 	4.8.5 	2.17
