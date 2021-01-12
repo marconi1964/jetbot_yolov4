@@ -38,7 +38,7 @@ Table 1. Native Linux Distribution Support in CUDA 11.2
 |Ubuntu 18.04.z (z <= 5) 	|4.15.0 	|8.2.0 	|2.27| ditto ||||||
 |Ubuntu 16.04.z (z <= 7) 	|4.5 	|5.4.0 	|2.23| ditto ||||||
 |Debian 10.6 	|4.19.0 	|8.3.0 	|2.28| ditto ||||||
-|Fedora |33 	|5.8 	|10.0.1 	|2.31| ditto ||||||
+|Fedora 33 	|5.8 	|10.0.1 	|2.31| ditto ||||||
 
 
 > - 0.2.1 - Verify the system has a CUDA-capable GPU
