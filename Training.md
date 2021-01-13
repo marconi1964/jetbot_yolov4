@@ -4,7 +4,50 @@
 
 ## Training on a server
 ### 0. Prerequisite - prepare a server with GPU, and CentOS 7 installed (CentOS is chosen as it is open source version of RedHat)
-- 0.1 - Python 3.6.8 is installed as default Python in CentOS 7 by checking with the following command
+
+- 0.1 - Add User to Sudoers in CentOS (necessary for installation)
+> - Reference [Add User to Sudoers in CentOS](https://linuxize.com/post/how-to-add-user-to-sudoers-in-centos/) 
+>   - Add user to the sudoer list by editing the file /etc/sudoers
+
+```
+$ su                   # use root to modify /etc/sudoers
+# vi /etc/sudoers
+```
+>     - and add the following line at the end of /etc/sudoers. Need to change the 'username' to the user id you log in
+```
+username  ALL=(ALL) NOPASSWD:ALL
+```
+>   - Or, instead of editing the sudoers file, you can achieve the same by creating a new file with the authorization rules in the /etc/sudoers.d directory. Add the same rule as you would add to the sudoers file:
+
+```
+$ echo "username  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/username
+$
+```
+
+- 0.2 - Installation RDP server for GUI remote acess 
+> - Reference [Installing and configuring an RDP Server on CentOS 7](https://serverspace.io/support/help/installing-and-configuring-an-rdp-server-on-centos-7/) and follow the following instructions
+
+```
+# Update the packages installed on the system:
+
+$ sudo yum -y update
+
+# Then install the necessary packages:
+
+$ sudo yum install -y epel-release
+$ sudo yum install -y xrdp
+$ sudo systemctl enable xrdp
+$ sudo systemctl start xrdp
+
+# CentOS uses FirewallD, open port 3389/TCP for RDP:
+
+$ sudo firewall-cmd --add-port=3389/tcp --permanent
+$ sudo firewall-cmd --reload
+$
+```
+
+
+- 0.3 - Python 3.6.8 is installed as default Python in CentOS 7 by checking with the following command
 
 ```
 $ python3 --version
@@ -12,7 +55,7 @@ Python 3.6.8
 $
 ```
 
-- 0.2 Check GPU status
+- 0.4 Check GPU status
 > - 參考 [NVidia 官網 - CUDA installation on Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
 >   - Some actions must be taken before the CUDA Toolkit and Driver can be installed on Linux:
 >     - Verify the system has a CUDA-capable GPU.
@@ -41,7 +84,7 @@ Table 1. Native Linux Distribution Support in CUDA 11.2
 |Fedora 33 	|5.8 	|10.0.1 	|2.31| ditto ||||||
 
 
-> - 0.2.1 - Verify the system has a CUDA-capable GPU
+> - 0.4.1 - Verify the system has a CUDA-capable GPU
 
 ```
 $ lspci | grep -i NVIDIA
@@ -50,10 +93,13 @@ d8:00.0 3D controller: NVIDIA Corporation GV100GL [Tesla V100 PCIe 32GB] (rev a1
 $
 ```
 
-> - 0.2.2 - Verify the system is running a supported version of Linux
+> - 0.4.2 - Verify the system is running a supported version of Linux
 
 ```
-$ uname -m && cat /etc/*release
-$
+$ uname
+
+
 ```
+
+
 ### 1. 
