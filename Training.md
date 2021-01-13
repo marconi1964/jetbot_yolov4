@@ -56,7 +56,16 @@ $
 ```
 
 #### 0.4 Check GPU status
-> - 參考 [NVidia 官網 - CUDA installation on Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+> - 參考 NVidia 文章
+> - [CUDA Quick Start Guide](https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html#linux)
+> - [CUDA installation on Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+> - [CUDA Toolkit Download](https://developer.nvidia.com/cuda-downloads)
+>   - System requirements :
+>     - To use CUDA on your system, you will need the following installed:
+>     -     CUDA-capable GPU
+>     -     A supported version of Linux with a gcc compiler and toolchain
+>     -     NVIDIA CUDA Toolkit (available at https://developer.nvidia.com/cuda-downloads)
+
 >   - Some actions must be taken before the CUDA Toolkit and Driver can be installed on Linux:
 >     - Verify the system has a CUDA-capable GPU.
 >     - Verify the system is running a supported version of Linux.
