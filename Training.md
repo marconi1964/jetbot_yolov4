@@ -5,7 +5,7 @@
 ## Training on a server
 ### 0. Prerequisite - prepare a server with GPU, and CentOS 7 installed (CentOS is chosen as it is open source version of RedHat)
 
-- 0.1 - Add User to Sudoers in CentOS (necessary for installation)
+#### 0.1 - Add User to Sudoers in CentOS (necessary for installation)
 > - Reference [Add User to Sudoers in CentOS](https://linuxize.com/post/how-to-add-user-to-sudoers-in-centos/) 
 >   - Add user to the sudoer list by editing the file /etc/sudoers
 
@@ -24,7 +24,7 @@ $ echo "username  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/username
 $
 ```
 
-- 0.2 - Installation RDP server for GUI remote acess 
+#### 0.2 - Installation RDP server for GUI remote acess 
 > - Reference [Installing and configuring an RDP Server on CentOS 7](https://serverspace.io/support/help/installing-and-configuring-an-rdp-server-on-centos-7/) and follow the following instructions
 
 ```
@@ -47,7 +47,7 @@ $
 ```
 
 
-- 0.3 - Python 3.6.8 is installed as default Python in CentOS 7 by checking with the following command
+#### 0.3 - Python 3.6.8 is installed as default Python in CentOS 7 by checking with the following command
 
 ```
 $ python3 --version
@@ -55,7 +55,7 @@ Python 3.6.8
 $
 ```
 
-- 0.4 Check GPU status
+#### 0.4 Check GPU status
 > - 參考 [NVidia 官網 - CUDA installation on Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
 >   - Some actions must be taken before the CUDA Toolkit and Driver can be installed on Linux:
 >     - Verify the system has a CUDA-capable GPU.
