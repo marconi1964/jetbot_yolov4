@@ -266,7 +266,8 @@ $ ./nbody -cpu      # 可以執行
 >   - 2nd, need to add     cudaDeviceSynchronize();
 >     - [Cuda Hello World printf not working](https://stackoverflow.com/questions/15669841/cuda-hello-world-printf-not-working-even-with-arch-sm-20)
 
-``` this "hello.cu" example is buggy
+``` 
+// this "hello.cu" example is buggy
 __global__ void cuda_hello(){
     printf("Hello World from GPU!\n");
 }
@@ -277,7 +278,8 @@ int main() {
 }
 ```
 
-``` this works well
+```
+// this "hello.cu" example works well
 #include <stdio.h>
 
 __global__ void hello() {
