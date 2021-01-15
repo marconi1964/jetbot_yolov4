@@ -237,3 +237,14 @@ $ ./Downloads/NVIDIA_CUDA-11.2_Samples/bin/x86_64/linux/release/bandwidthTest
 
 ```
 
+> - 至於另一個 example : nbody, 就出現問題, 可能跟 GPU display 有關, 沒有再 follow up.
+
+```
+$ cd ~/Downloads/NVIDIA_CUDA-11.2_Samples/5_Simulations/nbody
+$ make
+$ ./nbody
+# .....
+CUDA error at bodysystemcuda_impl.h:184 code=999(cudaErrorUnknown) "cudaGraphicsGLRegisterBuffer(&m_pGRes[i], m_pbo[i], cudaGraphicsMapFlagsNone)" 
+
+$ ./nbody -cpu      # 可以執行
+```
