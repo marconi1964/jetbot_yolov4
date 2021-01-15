@@ -60,6 +60,12 @@ $
 > - [CUDA Quick Start Guide](https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html#linux)
 > - [CUDA installation on Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
 > - [CUDA Toolkit Download](https://developer.nvidia.com/cuda-downloads)
+> - Q&A on Stackoverflow
+>   - [Different CUDA versions shown by nvcc and NVIDIA-smi](https://stackoverflow.com/questions/53422407/different-cuda-versions-shown-by-nvcc-and-nvidia-smi/53504578#53504578)
+>   - [How do I select which GPU to run a job on?](https://stackoverflow.com/questions/39649102/how-do-i-select-which-gpu-to-run-a-job-on)
+>   - CUDA has 2 primary APIs, the driver and the runtime API. Both have a corresponding version 
+>     - The driver API (e.g. libcuda.so on linux, incl nvidia-smi) is installed by the GPU driver installer :
+>     - The runtime API (e.g. libcudart.so on linux, and also nvcc) is installed by the CUDA toolkit installer (which may also have a GPU driver installer bundled in it).
 
 > - System requirements : To use CUDA on your system, you will need the following installed:
 >   - CUDA-capable GPU
