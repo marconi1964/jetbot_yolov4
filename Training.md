@@ -222,8 +222,8 @@ $ export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib${LD_LIBRARY_PATH:+:${LD_LIBRAR
 
 ```
 # This script is installed with the cuda-samples-11-2 package. The cuda-samples-11-2 package installs only a read-only copy in /usr/local/cuda-11.2/samples.
-$ cd ~ 
 # example : cuda-install-samples-11.2.sh <dir>
+$ cd ~ 
 $ cuda-install-samples-11.2.sh ~/Downloads
 
 # The version of the CUDA Toolkit can be checked by running nvcc -V in a terminal window. The nvcc command runs the compiler driver that compiles CUDA programs. It calls the gcc compiler for C code and the NVIDIA PTX compiler for the CUDA code.
