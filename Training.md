@@ -226,7 +226,8 @@ $ export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib${LD_LIBRARY_PATH:+:${LD_LIBRAR
 #### 4.2 (Optional) Installing , Compiling the Examples & Running the Binaries
 > - Install Writable Samples
 >   - In order to modify, compile, and run the samples, the samples must be installed with write permissions. A convenience installation script is provided:
-> - The NVIDIA CUDA Toolkit includes sample programs in source form. You should compile them by changing to ~/NVIDIA_CUDA-11.2_Samples and typing make. The resulting binaries will be placed under ~/NVIDIA_CUDA-11.2_Samples/bin/.
+> - The NVIDIA CUDA Toolkit includes sample programs in source form. You should compile them by changing to ~/NVIDIA_CUDA-11.2_Samples and typing make. The resulting binaries will be placed under ~/NVIDIA_CUDA-11.2_Samples/bin/
+
 
 ```
 # This script is installed with the cuda-samples-11-2 package. The cuda-samples-11-2 package installs only a read-only copy in /usr/local/cuda-11.2/samples.
@@ -255,4 +256,36 @@ $ ./nbody
 CUDA error at bodysystemcuda_impl.h:184 code=999(cudaErrorUnknown) "cudaGraphicsGLRegisterBuffer(&m_pGRes[i], m_pbo[i], cudaGraphicsMapFlagsNone)" 
 
 $ ./nbody -cpu      # 可以執行
+```
+
+### 5. Hello world
+> - [Hello World of CUDA](https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/)
+>   - but with 2 bugs
+>   - 1st, need to add #include <stdio.h>
+>     - [Trouble compiling helloworld.cu](https://stackoverflow.com/questions/7301478/trouble-compiling-helloworld-cu)
+>   - 2nd, need to add     cudaDeviceSynchronize();
+>     - [Cuda Hello World printf not working](https://stackoverflow.com/questions/15669841/cuda-hello-world-printf-not-working-even-with-arch-sm-20)
+
+``` this "hello.cu" example is buggy
+__global__ void cuda_hello(){
+    printf("Hello World from GPU!\n");
+}
+
+int main() {
+    cuda_hello<<<1,1>>>(); 
+    return 0;
+}
+```
+
+``` this works well
+#include <stdio.h>
+
+__global__ void hello() {
+    printf("Hello World from GPU!\n");
+}
+
+int main() {
+    hello<<<1, 1>>>();
+    cudaDeviceSynchronize();
+}
 ```
