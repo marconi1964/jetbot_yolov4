@@ -66,6 +66,8 @@ $
 >   - CUDA has 2 primary APIs, the driver and the runtime API. Both have a corresponding version 
 >     - The driver API (e.g. libcuda.so on linux, incl nvidia-smi) is installed by the GPU driver installer :
 >     - The runtime API (e.g. libcudart.so on linux, and also nvcc) is installed by the CUDA toolkit installer (which may also have a GPU driver installer bundled in it).
+>   - In any event, the (installed) driver API version may not always match the (installed) runtime API version, especially if you install a GPU driver independently from installing CUDA toolkit.
+>     - In most cases, if nvidia-smi reports a CUDA version that is numerically equal to or higher than the one reported by nvcc -V, this is not a cause for concern. That is a defined compatibility path in CUDA (newer drivers/driver API support "older" CUDA toolkits/runtime API). For example if nvidia-smi reports CUDA 10.2, and nvcc -V reports CUDA 10.1, that is generally not cause for concern. It should just work, and it does not necessarily mean that you "actually installed CUDA 10.2 when you meant to install CUDA 10.1"
 
 > - System requirements : To use CUDA on your system, you will need the following installed:
 >   - CUDA-capable GPU
