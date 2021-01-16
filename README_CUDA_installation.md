@@ -65,6 +65,15 @@ $
 >     - The runtime API (e.g. libcudart.so on linux, and also nvcc) is installed by the CUDA toolkit installer (which may also have a GPU driver installer bundled in it).
 >   - In any event, the (installed) driver API version may not always match the (installed) runtime API version, especially if you install a GPU driver independently from installing CUDA toolkit.
 >     - In most cases, if nvidia-smi reports a CUDA version that is numerically equal to or higher than the one reported by nvcc -V, this is not a cause for concern. That is a defined compatibility path in CUDA (newer drivers/driver API support "older" CUDA toolkits/runtime API). For example if nvidia-smi reports CUDA 10.2, and nvcc -V reports CUDA 10.1, that is generally not cause for concern. It should just work, and it does not necessarily mean that you "actually installed CUDA 10.2 when you meant to install CUDA 10.1"
+>   - 新舊版本的 CUDA toolkit 可以參考此篇文章, 雖然是不完整, 至少有跡可循[Older versions of Cuda](https://forums.developer.nvidia.com/t/older-versions-of-cuda/108163)
+```
+$ sudo apt-get install cuda-toolkit-10-0
+```
+>     - 我安裝了最新的 CUDA 11.2 配上 cuDNN 8.0.5, 出現以下錯誤, 嘗試重新安裝 CUDA 回 10.2 試試看, 還找不到 uninstall CUDA 的方法
+```
+cuDNN status Error in: file: ./src/convolutional_kernels.cu : () : line: 533 : build time: Jan 15 2021 - 09:27:55 
+cuDNN Error: CUDNN_STATUS_BAD_PARAM
+```
 
 > - System requirements : To use CUDA on your system, you will need the following installed:
 >   - CUDA-capable GPU
@@ -292,5 +301,106 @@ int main() {
 
 ## 6. Install cuDNN
 > - Follow [NVidia cuNDD document](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-windows)
-> - 
 
+### 6.1 - Installing cuDNN On Linux
+> - 6.1.1 - Installing NVIDIA Graphics Drivers
+>   - 在 Server 上, 不需要裝 graphics driver
+> - 6.1.2 - Installing The CUDA Toolkit For Linux
+>   - already installed at Step 2
+> - 6.1.3 - Downloading cuDNN For Linux
+>    -    Go to: [NVIDIA cuDNN home page](https://developer.nvidia.com/cudnn) 
+>         - log in with Google marconi.jiang
+>    -    Click Download.
+>    -    Complete the short survey and click Submit. 
+>    -    Accept the Terms and Conditions. A list of available download versions of cuDNN displays.
+>    -    Select the cuDNN version you want to install. A list of available resources displays.
+>    - 下載 4 個檔案
+>       - 在此目錄下 Library for Windows, Mac, Linux, Ubuntu and RedHat/Centos(x86_64architecture)
+>           cuDNN Library for Linux
+>       - 在此目錄下 Library for Red Hat (x86_64 & Power architecture)
+>           cuDNN Runtime Library for RedHat/Centos 7.3 (RPM)
+>           cuDNN Developer Library for RedHat/Centos 7.3 (RPM)
+>           cuDNN Code Samples and User Guide for RedHat/Centos 7.3 (RPM)
+> - 6.1.4 - Installing On Linux
+> - 接下來的操作, 是以 CUDA 與 cuDNN 預設的目錄
+>   - your CUDA directory path is referred to as /usr/local/cuda/          # 在 Step 2 已經設定完成
+>   - your cuDNN download path is referred to as <cudnnpath>               # 我直接下載至 ~/
+> - 6.1.4.1 - Tar File Installation
+>   - Before issuing the following commands, you'll need to replace x.x and v8.x.x.x with your specific CUDA and cuDNN versions and package date.
+>   - Procedure
+>     - 1. Navigate to your <cudnnpath> directory containing the cuDNN tar file.
+>     - 2. Unzip the cuDNN package.
+```
+    $ tar -xzvf cudnn-x.x-linux-x64-v8.x.x.x.tgz
+    or
+    $ tar -xzvf cudnn-x.x-linux-aarch64sbsa-v8.x.x.x.tgz
+```
+>     - 3. Copy the following files into the CUDA Toolkit directory.
+```
+    $ sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
+    $ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+    $ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+```
+
+> - 6.1.4.2 - RPM Installation
+>   - Procedure
+>     - 1. Download the rpm package libcudnn*.rpm to the local path.
+>     - 2. Install the rpm package from the local path. This will install the cuDNN libraries.
+
+```
+$ rpm -ivh libcudnn8-*.x86_64.rpm
+$ rpm -ivh libcudnn8-devel-*.x86_64.rpm
+$ rpm -ivh libcudnn8-samples-*.x86_64.rpm
+
+# or
+
+$ rpm -ivh libcudnn8-*.aarch64.rpm
+$ rpm -ivh libcudnn8-devel-*.aarch64.rpm
+$ rpm -ivh libcudnn8-samples-*.aarch64.rpm
+```
+
+> - 6.1.4.3. Package Manager Installation
+>   - The Package Manager installation interfaces with your system's package manager.
+>   - If the actual installation packages are available online, then the package manager will automatically download them and install them. Otherwise, the package manager installs a local repository containing the installation packages on the system.
+>   - Whether the repository is available online or installed locally, the installation procedure is identical.
+> - RHEL Network Installation
+>   - These are the installation instructions for RHEL7 and RHEL8 users.
+> - Procedure
+>   - 1. Enable the repository:
+
+```
+$ sudo yum-config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/cuda-${OS}.repo
+$ sudo yum clean all
+
+#    Where ${OS} is rhel7 or rhel8. 需要將 ${OS} 改成 rhel7
+#    Install the cuDNN library:
+
+$ sudo yum install libcudnn8=${cudnn_version}-1.${cuda_version}
+$ sudo yum install libcudnn8-devel=${cudnn_version}-1.${cuda_version}
+
+#  Where: 需要將版本號修改如下
+#        ${cudnn_version} is 8.0.5.39
+#        ${cuda_version} is cuda10.2, cuda10.1, cuda11.0 or cuda11.1
+```
+
+## 7. Verifying The Install On Linux
+> -To verify that cuDNN is installed and is running properly, compile the mnistCUDNN sample located in the /usr/src/cudnn_samples_v8 directory in the Debian file.
+> - Procedure
+
+```
+#   Copy the cuDNN samples to a writable path.
+$ cp -r /usr/src/cudnn_samples_v8/ $HOME
+
+#   Go to the writable path.
+$ cd  $HOME/cudnn_samples_v8/mnistCUDNN
+
+#   Compile the mnistCUDNN sample.
+$make clean && make
+
+#   Run the mnistCUDNN sample.
+$ ./mnistCUDNN
+
+#   If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
+#
+#    Test passed!
+```

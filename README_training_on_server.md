@@ -6,10 +6,14 @@ Assume "CUDA_installation.md" is completed
 >   - OpenCV       # OpenCV 2
 >   - unar         # decompression tool
 >   - iPython and Jupyter for iPython notebook
-> - Execute darknet_setup.sh
 
 ```
 $ git clone https://github.com/marconi1964/jetbot_yolov4.git
 $ cd jetbot_yolov4
 $ ./darknet_setup.sh
+```
+
+## 2. Execute Darknet compilation and training
+```
+$ ./darknet.sh
 ```
