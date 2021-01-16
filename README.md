@@ -248,7 +248,9 @@ $ make
 > 1. 在 Google Colab 執行 'visual_model.ipynb' - github <span style="color:green">
 [Jetbot_YoloV4 - README](https://github.com/marconi1964/jetbot_yolov4) </span> )
 >    - remember to change runtime type to 'GPU'
->    - 儲存模型 yolov4-416.weights 跟 yolov4-416.cfg 到 Jetson Nano
+>    - 儲存模型 yolov4-416.weights (儲存於 /content/darknet/backup/) 跟 yolov4-416.cfg (儲存於 /content/darknet/cfg/) 到 Jetson Nano
+
+> 1-1. 如果是在 Server 上執行, 參考 CUDA_installation.md 跟 Training_on_server.md
 
 > 2. <span style="color:green">Model translation from to onnx to tensorrt </span>
 

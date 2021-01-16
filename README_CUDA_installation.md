@@ -255,7 +255,7 @@ CUDA error at bodysystemcuda_impl.h:184 code=999(cudaErrorUnknown) "cudaGraphics
 $ ./nbody -cpu      # 可以執行
 ```
 
-## 5. Hello world
+## 5. Hello world - CUDA
 > - [Hello World of CUDA](https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/)
 >   - but with 2 bugs
 >   - 1st, need to add #include <stdio.h>
@@ -290,4 +290,7 @@ int main() {
 }
 ```
 
+## 6. Install cuDNN
+> - Follow [NVidia cuNDD document](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-windows)
+> - 
 
