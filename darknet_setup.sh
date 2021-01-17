@@ -4,6 +4,8 @@
 # prerequite was prepared in "darknet_setup.sh"
 # execution in "darknet.sh"
 
+# check README_CUDA_installation.md and README_training_on_server.md
+
 # Install decompression tool unar
 sudo yum install -y epel-release
 sudo yum install -y unar
