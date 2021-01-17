@@ -248,9 +248,9 @@ $ make
 > 1. 在 Google Colab 執行 'visual_model.ipynb' - github <span style="color:green">
 [Jetbot_YoloV4 - README](https://github.com/marconi1964/jetbot_yolov4) </span> )
 >    - remember to change runtime type to 'GPU'
->    - 儲存模型 yolov4-416.weights (儲存於 /content/darknet/backup/) 跟 yolov4-416.cfg (儲存於 /content/darknet/cfg/) 到 Jetson Nano
+>    - 儲存模型 yolov4-416.weights (儲存於 /content/darknet/backup/) 跟 yolov4-416.cfg (儲存於 /content/darknet/cfg/) 到 Jetson Nano 的 ${HOME}/tensorrt_demos/yolo 下
 
-> 1-1. 如果是在 Server 上執行, 參考 CUDA_installation.md 跟 Training_on_server.md
+> - 1-1. 如果是在 Server 上執行, 參考 CUDA_installation.md 跟 Training_on_server.md
 
 > 2. <span style="color:green">Model translation from to onnx to tensorrt </span>
 
@@ -265,14 +265,14 @@ $ python3 onnx_to_tensorrt.py -v -c 4 -m yolov4-416    # 此轉檔需要一段�
 ## <span style="color:blue">開跑  </span>
 > 1. 下載 [github - jetbot_yolov4](https://github.com/marconi1964/jetbot_yolov4)
 > 2. 將 main.py copy 到 tensorrt_demos
-> 3. 執行 python3 main.py
+> 3. 執行 python3 jetbot_main.py
 
 ```
 $ cd ~
 $ git clone https://github.com/marconi1964/jetbot_yolov4.git
 $ cp ${HOME}/jetbot_yolov4/main.py ${HOME}/tensorrt_demos
 $ cd ${HOME}/tensorrt_demos
-$ python3 main.py
+$ python3 jetbot_main.py
 ```
 
 
