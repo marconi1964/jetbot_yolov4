@@ -134,10 +134,10 @@ $
 >   - [How to Install GCC Compiler on CentOS 7](https://linuxize.com/post/how-to-install-gcc-compiler-on-centos-7/)
 
 ```
-$ yum install centos-release-scl
+$ sudo yum install -y centos-release-scl
 
 # Then you can install GCC 9 and its C++ compiler:
-$ yum install devtoolset-9-gcc devtoolset-9-gcc-c++
+$ sudo yum install -y devtoolset-9-gcc devtoolset-9-gcc-c++
 
 # To switch to a shell which defaults gcc and g++ to this GCC version, use:
 # 每次 reboot 後都需要再執行以下指令, 要不然, reboot 後會回到 default 的 4.8.5
@@ -186,7 +186,7 @@ $ sudo yum -y install cuda-drivers
 > - To enable EPEL:
 
 ```
-$ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 $
 ```
 > - Enable optional repos:
