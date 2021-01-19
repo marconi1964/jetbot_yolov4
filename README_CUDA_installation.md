@@ -47,17 +47,25 @@ $
 ### 1.3 - Python 3.6.8 is installed as default Python in CentOS 7 by checking with the following command
 
 ```
+# install python3
+$ sudo yum update
+$ sudo yum install -y python3
+
 $ python3 --version
 Python 3.6.8
 $
 ```
 
 ## 2. Pre-installation Actions
+
+### 2.1 Install CUDA 11.2
 > - 參考 NVidia 文章
 > - [CUDA Quick Start Guide](https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html#linux)
 > - [CUDA installation on Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
 > - [CUDA Toolkit Download](https://developer.nvidia.com/cuda-downloads)
 > - Q&A on Stackoverflow
+>   - [Nvidia 官網 - CUDA compatibility](https://docs.nvidia.com/deploy/cuda-compatibility/index.html)
+>   - [NVIDIA 官網 - CUDA Toolkit Release Notes](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)
 >   - [Different CUDA versions shown by nvcc and NVIDIA-smi](https://stackoverflow.com/questions/53422407/different-cuda-versions-shown-by-nvcc-and-nvidia-smi/53504578#53504578)
 >   - [How do I select which GPU to run a job on?](https://stackoverflow.com/questions/39649102/how-do-i-select-which-gpu-to-run-a-job-on)
 >   - CUDA has 2 primary APIs, the driver and the runtime API. Both have a corresponding version 
@@ -75,6 +83,15 @@ cuDNN status Error in: file: ./src/convolutional_kernels.cu : () : line: 533 : b
 cuDNN Error: CUDNN_STATUS_BAD_PARAM
 ```
 
+### 2.2 Install CUDA 10.1
+> - 經過了幾次的嘗試, 覺得用 CUDA 10.1 的版本可能比較穩定 (目前 2021 年 1 月的 Colab 還是用 10.1), 決定安裝 CUDA 10.1 版本
+> - NVidia 的官網, 並沒有描寫對舊版本的安裝的方法
+> - 總算找一篇文章, 清楚說明 GPU driver 跟 CUDA 分別安裝的方法, 就依照此方法
+> - [Install NVIDIA Graphic Driver - nvidia-smi](https://www.server-world.info/en/note?os=CentOS_7&p=nvidia)
+>   - 需要用 CLI 模式 [If you are using Desktop Environment, change to CUI, refer to here](https://www.server-world.info/en/note?os=CentOS_7&p=runlevel)
+> - [Install CUDA - gvcc & examples](https://www.server-world.info/en/note?os=CentOS_7&p=cuda&f=6)
+
+### 2.3 Check system requirements (for both CUDA 10.1 and 11.2)
 > - System requirements : To use CUDA on your system, you will need the following installed:
 >   - CUDA-capable GPU
 >   - A supported version of Linux with a gcc compiler and toolchain
@@ -105,10 +122,11 @@ Table 1. Native Linux Distribution Support in CUDA 11.2
 |Fedora 33 	|5.8 	|10.0.1 	|2.31| ditto ||||||
 
 > - Remark (2) Note that starting with CUDA 11.0, the minimum recommended GCC compiler is at least GCC 5 due to C++11 requirements in CUDA libraries e.g. cuFFT and CUB. On distributions such as RHEL 7 or CentOS 7 that may use an older GCC toolchain by default, it is recommended to use a newer GCC toolchain with CUDA 11.0. Newer GCC toolchains are available with the Red Hat Developer Toolset. 
+> - Personal remark : no need to upgrade gcc version for CUDA 10.1, just keep default gcc version to 4.8.5
 
 > - Follow this document [CUDA installation on Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) and take following steps:
 
-### 2.1 - Verify the system has a CUDA-capable GPU
+### 2.4 - Verify the system has a CUDA-capable GPU (for both CUDA 10.1 and 11.2)
 
 ```
 $ lspci | grep -i NVIDIA
@@ -117,7 +135,7 @@ d8:00.0 3D controller: NVIDIA Corporation GV100GL [Tesla V100 PCIe 32GB] (rev a1
 $
 ```
 
-### 2.2 - Verify the system is running a supported version of Linux
+### 2.5 - Verify the system is running a supported version of Linux (for both CUDA 10.1 and 11.2)
 
 ```
 $ uname -m && cat /etc/*release | grep release
@@ -126,10 +144,11 @@ CentOS Linux release 7.9.2009 (Core)
 $ 
 ```
 
-### 2.3 - Verify the System Has gcc Installed
+### 2.6 - Verify the System Has gcc Installed (for CUDA 11.2)
 > - The gcc compiler is required for development using the CUDA Toolkit. It is not required for running CUDA applications. It is generally installed as part of the Linux installation, and in most cases the version of gcc installed with a supported version of Linux will work correctly. 
 > - Special attention on the GCC 5 is required for C++11 in CUDA libraries when CentOS 7 default GCC is 4.8.5. 
-> - Decide to install GCC 9 based on 2 web links (因為其中的說明不清楚, 或是範例有問題, 如需要額外加 sudo)
+> - Personal remark : no need to upgrade gcc version for CUDA 10.1, just keep default gcc version to 4.8.5. So below step can be skipped and go straight to 2.4.
+> - For CUDA 11.2, decide to install GCC 9 based on 2 web links (因為其中的說明不清楚, 或是範例有問題, 如需要額外加 sudo)
 >   - 主要參考 [How to install GCC/G++ 8 on CentOS](https://stackoverflow.com/questions/55345373/how-to-install-gcc-g-8-on-centos), 但是缺 sudo
 >   - [How to Install GCC Compiler on CentOS 7](https://linuxize.com/post/how-to-install-gcc-compiler-on-centos-7/)
 
@@ -149,7 +168,7 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
-### 2.4 - Verify the System has the Correct Kernel Headers and Development Packages Installed
+### 2.7 - Verify the System has the Correct Kernel Headers and Development Packages Installed (for both CUDA 10.1 and 11.2)
 > - Install the kernel headers and development packages for the currently running kernel. (結果是已經安裝好最新的版本)
 
 ```
@@ -158,13 +177,17 @@ $ sudo yum install kernel-devel-$(uname -r) kernel-headers-$(uname -r)
 Nothing to do
 $
 ```
-### 2.5 - Choose an Installation Method
+### 2.8 - Choose an Installation Method
+#### 2.8.1 install CUDA 10.1
+> - 
+
+#### 2.8.2 install CUDA 11.2 
 > - The CUDA Toolkit can be installed using either of two different installation mechanisms: 
 >   - distribution-specific packages (RPM and Deb packages), or 
 >   - a distribution-independent package (runfile packages). 
 > - It is recommended to use the distribution-specific packages, where possible. So *first method distribution-specific package* is chosen.
 
-### 2.6 - Download the NVIDIA CUDA Toolkit
+### 2.9 - Download the NVIDIA CUDA Toolkit
 > - The NVIDIA CUDA Toolkit is available at https://developer.nvidia.com/cuda-downloads. 
 > - 選擇最新版本 11.2, 選擇後, 也列出以下指令, 不過, 待會兒再執行
 
@@ -177,6 +200,7 @@ $ sudo yum -y install nvidia-driver-latest-dkms cuda
 $ sudo yum -y install cuda-drivers
 ```
 
+
 ### 2.7 Handle Conflicting Installation Methods
 > - Skipped
 
@@ -187,6 +211,8 @@ $ sudo yum -y install cuda-drivers
 
 ```
 $ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+# 如果系統跑出 Error : Nothing to do, 可能是正常, 因為之前已經執行過 sudo yum install epel-release
+# 參考 https://serverfault.com/questions/659513/error-nothing-to-do-trying-to-install-local-rpm
 $
 ```
 > - Enable optional repos:
@@ -213,14 +239,35 @@ $ sudo yum install cuda
 $ sudo yum install cuda-drivers
 ```
 
+如果不是要安裝最新版, 得改用以下指令集 (以安裝 10.2 版為例)
+
+```
+$ wget https://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-rhel7-10-2-local-10.2.89-440.33.01-1.0-1.x86_64.rpm
+$ sudo rpm -i cuda-repo-rhel7-10-2-local-10.2.89-440.33.01-1.0-1.x86_64.rpm
+
+# Clean Yum repository cache
+$ sudo yum clean expire-cache
+
+#Install CUDA
+$ sudo yum install cuda-10-2
+$ sudo yum install nvidia-driver-10.2-dkms --skip-broken
+$ sudo yum install cuda-drivers
+# 出現 nothing to do, 有點奇怪
+
+# 執行到目前為止, reboot 後, 可以執行 nvidia-smi 顯示 10.2 版, 只是, nvcc 還是 command not found (因為環境還沒設定)
+```
+
+
 ## 4. Post-installation Actions
 ### 4.1 (Mandatory) Environment Setup
 > - To add this path to the PATH variable (for 64 bit system):
 >   - or add below instruction in \~/.bashrc
 
 ```
-$ export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH}}
-$ export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+$ export PATH=/usr/local/cuda-10.2/bin${PATH:+:${PATH}}
+# or export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH}}
+$ export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# or export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 ```
 > - To change the environment variables for 32-bit operating systems:
 
@@ -243,6 +290,7 @@ $ cuda-install-samples-11.2.sh ~/Downloads
 
 # The version of the CUDA Toolkit can be checked by running nvcc -V in a terminal window. The nvcc command runs the compiler driver that compiles CUDA programs. It calls the gcc compiler for C code and the NVIDIA PTX compiler for the CUDA code.
 $ cd ~/Dowloads/NVIDIA_CUDA-11.2_Samples
+$ make
 
 # After compilation, find and run deviceQuery under ~/NVIDIA_CUDA-11.2_Samples. If the CUDA software is installed and configured correctly, the output for deviceQuery
 $ ./Downloads/NVIDIA_CUDA-11.2_Samples/bin/x86_64/linux/release/deviceQuery
