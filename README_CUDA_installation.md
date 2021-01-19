@@ -211,7 +211,7 @@ $ sudo yum -y install cuda-drivers
 ```
 
 
-### 2.7 Handle Conflicting Installation Methods
+### 2.10 Handle Conflicting Installation Methods
 > - Skipped
 
 
@@ -265,7 +265,7 @@ $ lspci | grep VGA
 # 不清楚用意為何, 待研究
 
 # 到下載 NVIDIA driver 的目錄
-$ sudo bash NVIDIA-Linux-x86_64-384.111.run
+$ sudo sh NVIDIA-Linux-x86_64-418.165.02.run
 [Accept]
 
 $ nvidia-smi
@@ -370,7 +370,27 @@ $ export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH}}
 $ export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 ```
 
-### 4.2 (Optional) Installing , Compiling the Examples & Running the Binaries
+### 4.2. (Optional) Install CUDA 10.1 patch 2 (目前安裝後有問題, 先不要安裝)
+> - Go to web [NVIDIA download - archive update 2](https://developer.nvidia.com/cuda-10.1-download-archive-update2)
+> - Select the version fit your requirements
+>   - in my case, Linux x86_64 CentOS 7 runfile (local)
+
+```
+# change to CLI mode
+$ sudo systemctl set-default multi-user.target
+$ sudo reboot now
+
+# log in at CLI mode
+$ wget https://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.243_418.87.00_linux.run
+$ sudo sh cuda_10.1.243_418.87.00_linux.run
+
+# change back to GUI mode
+$ sudo systemctl set-default graphical.target
+$ sudo reboot now
+
+```
+
+### 4.3 (Optional) Installing , Compiling the Examples & Running the Binaries
 > - Install Writable Samples
 >   - In order to modify, compile, and run the samples, the samples must be installed with write permissions. A convenience installation script is provided:
 > - The NVIDIA CUDA Toolkit includes sample programs in source form. You should compile them by changing to ~/NVIDIA_CUDA-11.2_Samples and typing make. The resulting binaries will be placed under ~/NVIDIA_CUDA-11.2_Samples/bin/
@@ -442,11 +462,11 @@ int main() {
 ```
 
 ## 6. Install cuDNN
-> - Follow [NVidia cuNDD document](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-windows)
+> - Follow [NVidia cuNDD document](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-linux)
 
 ### 6.1 - Installing cuDNN On Linux
 > - 6.1.1 - Installing NVIDIA Graphics Drivers
->   - 在 Server 上, 不需要裝 graphics driver
+>   - Already done in Step 3
 > - 6.1.2 - Installing The CUDA Toolkit For Linux
 >   - already installed at Step 2
 > - 6.1.3 - Downloading cuDNN For Linux
@@ -466,11 +486,11 @@ int main() {
 > - 6.1.4 - Installing On Linux
 > - 接下來的操作, 是以 CUDA 與 cuDNN 預設的目錄
 >   - your CUDA directory path is referred to as /usr/local/cuda/          # 在 Step 2 已經設定完成
->   - your cuDNN download path is referred to as <cudnnpath>               # 我直接下載至 ~/
+>   - your cuDNN download path is referred to as "cudnnpath"               # 我直接下載至 ~/Downloads (或 ~/)
 > - 6.1.4.1 - Tar File Installation
 >   - Before issuing the following commands, you'll need to replace x.x and v8.x.x.x with your specific CUDA and cuDNN versions and package date.
 >   - Procedure
->     - 1. Navigate to your <cudnnpath> directory containing the cuDNN tar file.
+>     - 1. Navigate to your "cudnnpath" directory containing the cuDNN tar file.
 >     - 2. Unzip the cuDNN package.
 ```
     $ tar -xzvf cudnn-x.x-linux-x64-v8.x.x.x.tgz
@@ -490,15 +510,15 @@ int main() {
 >     - 2. Install the rpm package from the local path. This will install the cuDNN libraries.
 
 ```
-$ rpm -ivh libcudnn8-*.x86_64.rpm
-$ rpm -ivh libcudnn8-devel-*.x86_64.rpm
-$ rpm -ivh libcudnn8-samples-*.x86_64.rpm
+$ sudo rpm -ivh libcudnn8-*.x86_64.rpm
+$ sudo rpm -ivh libcudnn8-devel-*.x86_64.rpm
+$ sudo rpm -ivh libcudnn8-samples-*.x86_64.rpm
 
 # or
 
-$ rpm -ivh libcudnn8-*.aarch64.rpm
-$ rpm -ivh libcudnn8-devel-*.aarch64.rpm
-$ rpm -ivh libcudnn8-samples-*.aarch64.rpm
+$ sudo rpm -ivh libcudnn8-*.aarch64.rpm
+$ sudo rpm -ivh libcudnn8-devel-*.aarch64.rpm
+$ sudo rpm -ivh libcudnn8-samples-*.aarch64.rpm
 ```
 
 > - 6.1.4.3. Package Manager Installation
@@ -517,13 +537,16 @@ $ sudo yum clean all
 #    Where ${OS} is rhel7 or rhel8. 需要將 ${OS} 改成 rhel7
 #    Install the cuDNN library:
 
-$ sudo yum install libcudnn8=${cudnn_version}-1.${cuda_version}
-$ sudo yum install libcudnn8-devel=${cudnn_version}-1.${cuda_version}
+$ sudo yum install libcudnn8-${cudnn_version}-1.${cuda_version}
+# nothing to do
+$ sudo yum install libcudnn8-devel-${cudnn_version}-1.${cuda_version}
+# nothing to do
 
 #  Where: 需要將版本號修改如下
 #        ${cudnn_version} is 8.0.5.39
 #        ${cuda_version} is cuda10.2, cuda10.1, cuda11.0 or cuda11.1
 ```
+
 
 ## 7. Verifying The Install On Linux
 > -To verify that cuDNN is installed and is running properly, compile the mnistCUDNN sample located in the /usr/src/cudnn_samples_v8 directory in the Debian file.
@@ -537,7 +560,7 @@ $ cp -r /usr/src/cudnn_samples_v8/ $HOME
 $ cd  $HOME/cudnn_samples_v8/mnistCUDNN
 
 #   Compile the mnistCUDNN sample.
-$make clean && make
+$ make clean && make
 
 #   Run the mnistCUDNN sample.
 $ ./mnistCUDNN
@@ -545,4 +568,17 @@ $ ./mnistCUDNN
 #   If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
 #
 #    Test passed!
+```
+
+## 8. remove NVIDIA driver, CUDA and cuDNN
+> - Check the end of this document [CUDA installation on Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+```
+
+# RHEL7/CentOS7
+# To remove CUDA Toolkit:
+$ sudo yum remove "cuda*" "*cublas*" "*cufft*" "*curand*" "*cusolver*" "*cusparse*" "*npp*" "*nvjpeg*" "nsight*"
+
+To remove NVIDIA Drivers:
+$ sudo yum remove "*nvidia*" 
+
 ```
