@@ -214,8 +214,10 @@ $ sudo yum -y install cuda-drivers
 ### 2.7 Handle Conflicting Installation Methods
 > - Skipped
 
+
+## 3 安裝 NVIDIA Driver 及 CUDA
 ## 3.1 Package Manager Installation - for CUDA 10.1 (參考網路文章)
-> - 此 3.1 章節參考網路文章, 而非 NVIDIA 官網, 建議參照此方法, 比較清楚
+> - 此 3.1 章節參考網路文章, 而非 NVIDIA 官網, 建議參照此方法, 比較清楚, (執行 3.1 後, 可以跳過 3.2, 直接到 Step 4)
 > - [Install NVIDIA Graphic Driver - nvidia-smi](https://www.server-world.info/en/note?os=CentOS_7&p=nvidia)
 >   - 需要用 CLI 模式 [If you are using Desktop Environment, change to CUI, refer to here](https://www.server-world.info/en/note?os=CentOS_7&p=runlevel)
 > - [Install CUDA - gvcc & examples](https://www.server-world.info/en/note?os=CentOS_7&p=cuda&f=6)
@@ -294,10 +296,6 @@ $ nvcc --version
 
 # 完成 CUDA 10.1 及 nvidia-smi 安裝
 ```
-
-
-### 3.1.2 安裝 NVIDIA CUDA
-
 
 
 ## 3.2 Package Manager Installation - for CUDA 11.2 (參考 NVIDIA 官網)
