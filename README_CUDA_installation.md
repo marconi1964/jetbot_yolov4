@@ -376,7 +376,8 @@ $ export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib${LD_LIBRARY_PATH:+:${LD_LIBRAR
 >   - in my case, Linux x86_64 CentOS 7 runfile (local)
 
 ```
-# change to CLI mode
+# change to CLI mode, otherwise, it will produce an error of below message
+# Executing NVIDIA-Linux-x86_64-418.87.00.run --ui=none --no-questions --accept-license --disable-nouveau --no-cc-version-check --install-libglvnd  2>&1[INFO]: Finished with code: 256
 $ sudo systemctl set-default multi-user.target
 $ sudo reboot now
 
@@ -462,7 +463,7 @@ int main() {
 ```
 
 ## 6. Install cuDNN
-> - Follow [NVidia cuNDD document](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-linux)
+> - Follow [NVidia cuNDD document](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html)
 
 ### 6.1 - Installing cuDNN On Linux
 > - 6.1.1 - Installing NVIDIA Graphics Drivers
