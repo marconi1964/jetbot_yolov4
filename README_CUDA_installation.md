@@ -177,17 +177,27 @@ $ sudo yum install kernel-devel-$(uname -r) kernel-headers-$(uname -r)
 Nothing to do
 $
 ```
-### 2.8 - Choose an Installation Method
-#### 2.8.1 install CUDA 10.1
-> - 
 
-#### 2.8.2 install CUDA 11.2 
+### 2.8 - Choose an Installation Method
 > - The CUDA Toolkit can be installed using either of two different installation mechanisms: 
 >   - distribution-specific packages (RPM and Deb packages), or 
 >   - a distribution-independent package (runfile packages). 
 > - It is recommended to use the distribution-specific packages, where possible. So *first method distribution-specific package* is chosen.
 
 ### 2.9 - Download the NVIDIA CUDA Toolkit
+#### 2.9.1 for CUDA 10.1
+> - NVIDIA driver download
+>   - Go to web link [NVIDIA Driver Downloads](https://www.nvidia.com/Download/index.aspx?lang=en)
+>     - Select Product Type : Data Center / Tesla
+>     - Product Series : Telsa V100
+>     - Operating System : Linux 64-bit
+>     - CUDA Toolkit : 10.1
+>     - Languages : English
+>   - AGREE & DOWNLOAD
+>   - Download file "NVIDIA-Linux-x86_64-418.165.02.run"
+>   - will install at Step 3 (for both NVIDIA driver and CUDA)
+
+#### 2.9.2 for CUDA 11.2
 > - The NVIDIA CUDA Toolkit is available at https://developer.nvidia.com/cuda-downloads. 
 > - 選擇最新版本 11.2, 選擇後, 也列出以下指令, 不過, 待會兒再執行
 
@@ -204,8 +214,94 @@ $ sudo yum -y install cuda-drivers
 ### 2.7 Handle Conflicting Installation Methods
 > - Skipped
 
-## 3. Package Manager Installation
-### 3.1 Satisfy third-party package dependency
+## 3.1 Package Manager Installation - for CUDA 10.1 (參考網路文章)
+> - 此 3.1 章節參考網路文章, 而非 NVIDIA 官網, 建議參照此方法, 比較清楚
+> - [Install NVIDIA Graphic Driver - nvidia-smi](https://www.server-world.info/en/note?os=CentOS_7&p=nvidia)
+>   - 需要用 CLI 模式 [If you are using Desktop Environment, change to CUI, refer to here](https://www.server-world.info/en/note?os=CentOS_7&p=runlevel)
+> - [Install CUDA - gvcc & examples](https://www.server-world.info/en/note?os=CentOS_7&p=cuda&f=6)
+### 3.1.1 安裝 NVIDIA driver
+> - 3.1.1.1 先改成 CLI 模式, 等安裝完後, 再改回 graphical 模式 (雖然不知道對 Server 安裝有何影響, 就照著做)
+
+```
+# 改成 CLI 模式
+$ sudo systemctl set-default multi-user.target
+$ sudo reboot now
+
+# 改成 GUI 模式
+$ sudo systemctl set-default graphical.target
+$ sudo reboot now
+```
+
+> - 3.1.1.2 Disable nouveau driver which is loaded by default as general graphic driver. (一樣雖然不知道對 Server 安裝有何影響, 就照著做)
+
+```
+$ sudo lsmod | grep nouveau 
+$ sudo vi /etc/modprobe.d/blacklist-nouveau.conf 
+
+# add to the end (create new if it does not exist)
+
+blacklist nouveau
+options nouveau modeset=0
+
+$ sudo dracut --force
+$ sudo reboot now
+
+```
+> - 3.1.1.3 Install required kernel packages  
+
+```
+$ sudo yum -y install kernel-devel-$(uname -r) kernel-header-$(uname -r) gcc make 
+Nothing to do
+# 如果出現 nothing to do, 應該是正常的
+```
+
+> - 3.1.1.4  	Download Graphic Driver for your Computer from NVIDIA site.
+> - [NVIDIA Driver download link](https://www.nvidia.com/Download/index.aspx?lang=en)
+
+```
+$ lspci | grep VGA 
+# 不清楚用意為何, 待研究
+
+# 到下載 NVIDIA driver 的目錄
+$ sudo bash NVIDIA-Linux-x86_64-384.111.run
+[Accept]
+
+$ nvidia-smi
+# 完成 NVIDIA driver 384 版及 nvidia-smi 安裝
+```
+
+> - 3.1.1.5 Install CUDA
+>   -  	Download CUDA Repository RPM package from the site below and Install it. 
+
+```
+$ sudo yum -y install yum-utils       # nothing to do
+# add repo for Centos 7
+$ sudo yum-config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo 
+
+# install CUDA 10.1 with enabling EPEL too
+$ sudo yum --enablerepo=epel -y install cuda-10-1 
+
+# update PATH environment
+$ vi /etc/profile.d/cuda101.sh
+
+# create new
+export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} 
+
+$ source /etc/profile.d/cuda101.sh
+
+$ nvcc --version 
+
+# 完成 CUDA 10.1 及 nvidia-smi 安裝
+```
+
+
+### 3.1.2 安裝 NVIDIA CUDA
+
+
+
+## 3.2 Package Manager Installation - for CUDA 11.2 (參考 NVIDIA 官網)
+### 3.2.1 Satisfy third-party package dependency
 > - Satisfy DKMS dependency: The NVIDIA driver RPM packages depend on other external packages, such as DKMS and libvdpau. Those packages are only available on third-party repositories, such as EPEL. Any such third-party repositories must be added to the package manager repository database before installing the NVIDIA driver RPM packages, or missing dependencies will prevent the installation from proceeding.
 > - To enable EPEL:
 
@@ -218,12 +314,12 @@ $
 > - Enable optional repos:
 >   - On RHEL 7 Linux only, no need for CentOS.
 
-### 3.2 Address custom xorg.conf, if applicable
+### 3.2.2 Address custom xorg.conf, if applicable
 > - The driver relies on an automatically generated xorg.conf file at /etc/X11/xorg.conf. If a custom-built xorg.conf file is present, this functionality will be disabled and the driver may not work. You can try removing the existing xorg.conf file, or adding the contents of /etc/X11/xorg.conf.d/00-nvidia.conf to the xorg.conf file. The xorg.conf file will most likely need manual tweaking for systems with a non-trivial GPU configuration.
 > - 在 /etc/X11/ 目錄下找不到 xorg.conf, 所以不必做任何動作
 
 
-### 3.3 Install CUDA
+### 3.2.3 Install CUDA
 
 ```
 # Assume download is completed at step 2.6, and go to the directory you have downloaded. Could be ~/. or ~/Downloads
