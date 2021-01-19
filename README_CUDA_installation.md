@@ -122,7 +122,7 @@ Table 1. Native Linux Distribution Support in CUDA 11.2
 |Fedora 33 	|5.8 	|10.0.1 	|2.31| ditto ||||||
 
 > - Remark (2) Note that starting with CUDA 11.0, the minimum recommended GCC compiler is at least GCC 5 due to C++11 requirements in CUDA libraries e.g. cuFFT and CUB. On distributions such as RHEL 7 or CentOS 7 that may use an older GCC toolchain by default, it is recommended to use a newer GCC toolchain with CUDA 11.0. Newer GCC toolchains are available with the Red Hat Developer Toolset. 
-> - Personal remark : no need to upgrade gcc version for CUDA 10.1, just keep default gcc version to 4.8.5
+> - Personal remark : no need to upgrade gcc version for CUDA 10.1, just keep default gcc version to 4.8.5. Check [Stackoverflow - CUDA incompatible with my gcc version](https://stackoverflow.com/questions/6622454/cuda-incompatible-with-my-gcc-version)
 
 > - Follow this document [CUDA installation on Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) and take following steps:
 
