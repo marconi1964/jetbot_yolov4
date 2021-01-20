@@ -47,5 +47,5 @@ save_json_path = "sample/test.json"
 labelme2coco.convert(labelme_folder, save_json_path)
 
 
-!sed -i "s/sample\/train\///g" ~/sample/train.json
-!sed -i "s/sample\/test\///g" ~/sample/test.json
+sed -i "s/sample\/train\///g" ~/sample/train.json
+sed -i "s/sample\/test\///g" ~/sample/test.json
