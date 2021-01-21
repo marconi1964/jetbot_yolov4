@@ -30,7 +30,7 @@ mkdir sample/test
 
 # do labelme2coco in Python3
 cp ~/jetbot_yolov4/darknet/darknet.py ~/
-python3 darknet.py
+python3 server_labelme2coco.py
 
 sed -i "s/sample\/train\///g" ~/sample/train.json
 sed -i "s/sample\/test\///g" ~/sample/test.json
