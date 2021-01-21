@@ -51,14 +51,6 @@ make
 wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
 ./darknet detect ~/darknet/cfg/yolov4.cfg yolov4.weights ~/darknet/data/dog.jpg -dont_show
 
-# settings for darknet traning
-sed -i "s/max_batches = 500500/max_batches=8000/g" ~/darknet/cfg/yolov4_my.cfg
-sed -i "s/steps=400000,450000/steps=6400,7200/g" ~/darknet/cfg/yolov4_my.cfg
-sed -i "s/classes=80/classes=4/g" ~/darknet/cfg/yolov4_my.cfg
-sed -i "s/filters=255/filters=27/g" ~/darknet/cfg/yolov4_my.cfg
-sed -i "s/width=608/width=416/g" ~/darknet/cfg/yolov4_my.cfg
-sed -i "s/height=608/height=416/g" ~/darknet/cfg/yolov4_my.cfg
-
 
 cd ~
 git clone https://github.com/ssaru/convert2Yolo.git

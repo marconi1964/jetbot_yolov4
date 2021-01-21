@@ -13,6 +13,13 @@ echo $'superman\npenguin\nlion\ncone' > data/coco_my.names
 # I used previously ~/sample as the directory and caused error. Modify to absolute directory /home/USERID/sample/ and works
 echo $'classes=4\ntrain=/home/USERID/sample/train.txt\nvalid=/home/USERID/sample/test.txt\nnames=/home/USERID/darknet/data/coco_my.names\nbackup=/home/USERID/darknet/backup/\neval=coco' > data/coco_my.data
 
+# settings for darknet traning
+sed -i "s/max_batches = 500500/max_batches=8000/g" ~/darknet/cfg/yolov4_my.cfg
+sed -i "s/steps=400000,450000/steps=6400,7200/g" ~/darknet/cfg/yolov4_my.cfg
+sed -i "s/classes=80/classes=4/g" ~/darknet/cfg/yolov4_my.cfg
+sed -i "s/filters=255/filters=27/g" ~/darknet/cfg/yolov4_my.cfg
+sed -i "s/width=608/width=416/g" ~/darknet/cfg/yolov4_my.cfg
+sed -i "s/height=608/height=416/g" ~/darknet/cfg/yolov4_my.cfg
 
 # Download tag'ed image files from 
 cd ~
