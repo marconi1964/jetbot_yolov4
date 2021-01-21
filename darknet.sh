@@ -5,7 +5,7 @@
 
 # check README_CUDA_installation.md and README_training_on_server.md
 
-cd darknet
+cd ~/darknet
 cp cfg/coco.data cfg/coco_my.data
 cp cfg/coco.names cfg/coco_my.names
 cp cfg/yolov4-custom.cfg cfg/yolov4_my.cfg
@@ -29,13 +29,13 @@ mkdir sample/train
 mkdir sample/test
 
 # do labelme2coco in Python3
-cp jetbot_yolov4/darknet/darknet.py ~/
+cp ~/jetbot_yolov4/darknet/darknet.py ~/
 python3 darknet.py
 
 sed -i "s/sample\/train\///g" ~/sample/train.json
 sed -i "s/sample\/test\///g" ~/sample/test.json
 
-cd convert2Yolo
+cd ~/convert2Yolo
 python3 example.py --datasets COCO --img_path ~/sample/Object_11_20/ --label ~/sample/train.json --convert_output_path ~/sample/Object_11_20/ --img_type ".JPG" --manifest_path ./ --cls_list_file ~/darknet/data/coco_my.names
 mv manifest.txt ~/sample/train.txt
 

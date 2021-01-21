@@ -6,6 +6,12 @@
 
 # check README_CUDA_installation.md and README_training_on_server.md
 
+# before execution of this shell, remember to take the actions below
+#  - $ cd jetbot_yolov4 
+#  - $ chmod +x *
+#  - $ ./darknet_setup.sh            # and make sure no 'sudo'
+
+
 # Install decompression tool unar
 sudo yum install -y epel-release
 sudo yum install -y unar
@@ -56,5 +62,5 @@ cd ~
 git clone https://github.com/ssaru/convert2Yolo.git
 cd convert2Yolo
 # modify requirements.txt to numpy=1.15.1 for convert2yolo dependency
-sed -i "s/numpy==1.14.3/numpy==1.15.1" requirements
+# sed -i "s/numpy==1.14.3/numpy==1.15.1" requirements
 pip3 install -r requirements.txt
