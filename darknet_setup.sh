@@ -48,7 +48,8 @@ sed -i "s/OPENCV=0/OPENCV=1/g" ~/darknet/Makefile
 # Check https://stackoverflow.com/questions/33107237/implicit-declaration-of-timersub-function-in-linux-what-must-i-define
 # to modify Makefile
 # add in the top of the Make file #define _BSD_SOURCE
-# add and remove CFLAG=--std=c99 
+# add and remove later CFLAG=--std=c99
+sed -i $"1s/^/#define _BSD_SOURCE\n/" ~/darknet/Makefile
 
 cd darknet
 make
