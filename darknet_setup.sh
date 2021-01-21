@@ -62,5 +62,5 @@ cd ~
 git clone https://github.com/ssaru/convert2Yolo.git
 cd convert2Yolo
 # modify requirements.txt to numpy=1.15.1 for convert2yolo dependency
-# sed -i "s/numpy==1.14.3/numpy==1.15.1" requirements
+sed -i "s/numpy==1.14.3/numpy==1.15.1/g" requirements.txt
 pip3 install -r requirements.txt
