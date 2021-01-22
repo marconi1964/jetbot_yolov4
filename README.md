@@ -250,7 +250,7 @@ $ make
 >    - remember to change runtime type to 'GPU'
 >    - 儲存模型 yolov4_my_final.weights (darknet 儲存於 /content/darknet/backup/) 跟 yolov4_my.cfg (darknet 儲存於 /content/darknet/cfg/) 到 Jetson Nano 的 ${HOME}/tensorrt_demos/yolo 下, 並改名為 yolov4-416.weights 跟 yolov4-416.cfg
 
-> - 1-1. 如果是在 Server 上執行, 參考 CUDA_installation.md 跟 Training_on_server.md
+> - 1-1. 如果是在 Server 上執行, 參考 README_CUDA_installation.md 跟 README_training_on_server.md
 >   - 執行以下指令
 
 ```
