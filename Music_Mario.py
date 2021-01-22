@@ -133,4 +133,3 @@ for i in mario_tones:
 
 pwm.stop()                         # stop PWM
 GPIO.cleanup()                     # resets GPIO ports used back to input mode
-
