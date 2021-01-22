@@ -430,9 +430,18 @@ $ ./nbody -cpu      # 可以執行
 ## 5. Hello world - CUDA
 > - [Hello World of CUDA](https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/)
 >   - but with 2 bugs
->   - 1st, need to add #include <stdio.h>
+>   - 1st, need to add 
+
+```
+#include <stdio.h>
+```
+
 >     - [Trouble compiling helloworld.cu](https://stackoverflow.com/questions/7301478/trouble-compiling-helloworld-cu)
->   - 2nd, need to add     cudaDeviceSynchronize();
+>   - 2nd, need to add     
+
+```
+   cudaDeviceSynchronize();
+```
 >     - [Cuda Hello World printf not working](https://stackoverflow.com/questions/15669841/cuda-hello-world-printf-not-working-even-with-arch-sm-20)
 
 ``` 
