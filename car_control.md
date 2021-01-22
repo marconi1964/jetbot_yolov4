@@ -1,3 +1,4 @@
+Edge AI project - object tracking of Jetson Nano small car
 - 策略
 > -
 - 模型
