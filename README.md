@@ -293,3 +293,4 @@ $ python3 jetbot_main.py
     - Blog : https://jkjung-avt.github.io/
     - Blog : [TensorRT YOLOv3 For Custom Trained Models](https://jkjung-avt.github.io/trt-yolov3-custom/)
 - 參考 [Derek 同學的 github](https://github.com/derekhsu/jetbot_yolov4)
+- 寫完後, 不小心發現一篇美女寫的文章, [YOLOv4訓練教學](https://medium.com/ching-i/yolo-c49f70241aa7). 她這一篇絕對比我寫的有吸引力.
