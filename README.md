@@ -292,7 +292,9 @@ $ python3 jetbot_main.py
     - Github : [Training a DarkNet YOLOv4 model for custimized dataset](https://github.com/jkjung-avt/yolov4_crowdhuman)
     - Blog : https://jkjung-avt.github.io/
     - Blog : [TensorRT YOLOv3 For Custom Trained Models](https://jkjung-avt.github.io/trt-yolov3-custom/)
+- [Darknet - AlexeyAB](https://github.com/AlexeyAB/darknet)
 - 參考 [Derek 同學的 github](https://github.com/derekhsu/jetbot_yolov4)
 - 寫完後, 不小心發現一篇美女寫的文章, [YOLOv4訓練教學](https://medium.com/ching-i/yolo-c49f70241aa7). 她這一篇絕對比我寫的有吸引力.
 - 還有一篇類似的, 以 video 為範例的 [Implementing YOLOv4 to detect custom objects using Google Colab](https://medium.com/analytics-vidhya/implementing-yolov4-to-detect-custom-objects-using-google-colab-6691c98b15ff)
 - [YOLOv4 - Ten Tactics to Build a Better Model](https://blog.roboflow.com/yolov4-tactics/)
+- [How to train YOLOv4 for custom objects detection in Google Colab](https://medium.com/ai-world/how-to-train-yolov4-for-custom-objects-detection-in-google-colab-1e934b8ef685)
