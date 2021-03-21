@@ -1,4 +1,4 @@
-### <span style="color:green"> AIA Edge AI 技術班 專案</span>
+# <span style="color:green"> AIA Edge AI 技術班 專案</span>
 
 ## <span style="color:blue">專案準備資料</span>
 > - [NVIDIA® Jetson Nano™ JETBOT AI ROBOT KIT](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetbot-ai-robot-kit/)
@@ -250,7 +250,7 @@ $ make
 >    - remember to change runtime type to 'GPU'
 >    - 儲存模型 yolov4_my_final.weights (darknet 儲存於 /content/darknet/backup/) 跟 yolov4_my.cfg (darknet 儲存於 /content/darknet/cfg/) 到 Jetson Nano 的 ${HOME}/tensorrt_demos/yolo 下, 並改名為 yolov4-416.weights 跟 yolov4-416.cfg
 
-> - 1-2. 如果是在 Server 上執行, 參考 README_CUDA_installation.md 跟 README_training_on_server.md
+> - 1-2. 如果是在 Server 上執行, 參考 [README_CUDA_installation.md](https://github.com/marconi1964/jetbot_yolov4/blob/master/README_CUDA_installation.md) 跟 [README_training_on_server.md](https://github.com/marconi1964/jetbot_yolov4/blob/master/README_training_on_server.md)
 >   - 執行以下指令
 
 ```
