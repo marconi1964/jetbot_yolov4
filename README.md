@@ -245,8 +245,9 @@ $ make
 > 參考 [JK Jung 的 github ](https://github.com/jkjung-avt/yolov4_crowdhuman) 的 training on Google Colab, 及注意事項 blog [TensorRT YOLOv3 For Custom Trained Models](https://jkjung-avt.github.io/trt-yolov3-custom/)
 >    - 注意檔案命名, 檔案名稱需要包含 yolov4-416 字樣, 如 yolov4-my-416.weights 跟 yolov4-my-416.cfg 或 yolov4-416.weights 跟 yolov4-416.cfg
 
-> 1. 在 Google Colab 執行 'visual_model.ipynb' - github <span style="color:green">
-[Jetbot_YoloV4 - README](https://github.com/marconi1964/jetbot_yolov4) </span> )
+> 1. 在 Google Colab 執行 'darknet_on_colab.ipynb' 
+>   - 上傳 github <span style="color:green">
+[Jetbot_YoloV4 - darknet_on_colab.ipynb](https://github.com/marconi1964/jetbot_yolov4/blob/master/darknet_on_colab.ipynb) </span> 到 colab
 >    - remember to change runtime type to 'GPU'
 >    - 儲存模型 yolov4_my_final.weights (darknet 儲存於 /content/darknet/backup/) 跟 yolov4_my.cfg (darknet 儲存於 /content/darknet/cfg/) 到 Jetson Nano 的 ${HOME}/tensorrt_demos/yolo 下, 並改名為 yolov4-416.weights 跟 yolov4-416.cfg
 
